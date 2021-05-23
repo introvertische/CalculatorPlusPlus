@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Calculator++</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="invalid_expression">Invalid expression</string>
+    <string name="invalid_expression_two">Problem with brackets</string>
+    <string name="menu_about">About</string>
+
+    <!-- Number pad -->
+    <string name="text_number_zero" translatable="false">0</string>
+    <string name="text_number_one" translatable="false">1</string>
+    <string name="text_number_two" translatable="false">2</string>
+    <string name="text_number_three" translatable="false">3</string>
+    <string name="text_number_four" translatable="false">4</string>
+    <string name="text_number_five" translatable="false">5</string>
+    <string name="text_number_six" translatable="false">6</string>
+    <string name="text_number_seven" translatable="false">7</string>
+    <string name="text_number_eight" translatable="false">8</string>
+    <string name="text_number_nine" translatable="false">9</string>
+    <string name="text_sign_comma" translatable="false">,</string>
+    <string name="text_sign_equal" translatable="false">=</string>
+    <string name="text_sign_additions" translatable="false">+</string>
+    <string name="text_sign_subtractions" translatable="false">−</string>
+    <string name="text_sign_multiplications" translatable="false">×</string>
+    <string name="text_sign_divisions" translatable="false">÷</string>
+    <string name="text_sign_pow" translatable="false">^</string>
+    <string name="text_sign_sqrt" translatable="false">√</string>
+    <string name="text_sign_opening_parenthesis" translatable="false">(</string>
+    <string name="text_sign_closing_parenthesis" translatable="false">)</string>
+    <string name="text_sign_delete" translatable="false">⌫</string>
+    <string name="text_sign_percent" translatable="false">%</string>
+    <string name="text_sign_clear" translatable="false">C</string>
+
+    <!-- Engineering Pad -->
+    <string name="text_sign_inv" translatable="false">INV</string>
+    <string name="text_sign_sin" translatable="false">sin</string>
+    <string name="text_sign_arcsin" translatable="false">sin⁻¹</string>
+    <string name="text_sign_cos" translatable="false">cos</string>
+    <string name="text_sign_arccos" translatable="false">cos⁻¹</string>
+    <string name="text_sign_tg" translatable="false">tg</string>
+    <string name="text_sign_arctg" translatable="false">tg⁻¹</string>
+    <string name="text_sign_mod" translatable="false">mod</string>
+    <string name="text_sign_ln" translatable="false">ln</string>
+    <string name="text_sign_cbrt" translatable="false">∛</string>
+    <string name="text_sign_log" translatable="false">log</string>
+    <string name="text_sign_module" translatable="false">|x|</string>
+    <string name="text_sign_module_two" translatable="false">abs</string>
+    <string name="text_sign_factorial" translatable="false">!</string>
+    <string name="text_sign_pi" translatable="false">π</string>
+    <string name="text_sign_e" translatable="false">e</string>
+
+    <!-- About -->
+    <string name="about_title">About</string>
+    <string name="about_telegram" translatable="false">Telegram: https://t.me/introvertischeApps</string>
+    <string name="about_footer_text">© Alexey Radke, 2021.\n All rights reserved.</string>
+    <string name="about_close">Close</string>
+
+
+</resources>
