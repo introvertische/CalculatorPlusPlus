@@ -13,37 +13,21 @@ import info.introvertische.calculator.R
 
 class HistoryFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        val listTitle = this.arguments?.getStringArrayList("answer")
+        val listContext = this.arguments?.getStringArrayList("expression")
         val rootView = inflater.inflate(R.layout.fragment_history, container, false)
 
-        val catNames = arrayOf(
-            "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
-            "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
-            "Китти", "Масяня", "Симба"
-        )
-
         val listHistory: ListView = rootView.findViewById(R.id.listHistory)
-
-        //listHistory.adapter = ArrayAdapter(inflater.context, android.R.layout.simple_list_item_2, android.R.id.text1, catNames)
-
-        //
-        val listTitle: List<String> = arrayListOf("2+2*2-9/5+1", "2+2", "9/3",
-                "title 4", "title 5")
-
-        val listContext: List<String> = arrayListOf("0", "4", "3",
-                "context 4", "context 5")
-
         val data: ArrayList<HashMap<String, String>> = arrayListOf()
-
         var m: HashMap<String, String>
 
-        for (i in listTitle.lastIndex downTo 0) {
+        for (i in listTitle?.lastIndex!! downTo 0) {
             m = hashMapOf()
             m["title"] = listTitle[i]
-            m["context"] = listContext[i]
+            m["context"] = listContext!![i]
             data.add(m)
         }
 
@@ -56,4 +40,5 @@ class HistoryFragment : Fragment() {
 
         return rootView
     }
+
 }

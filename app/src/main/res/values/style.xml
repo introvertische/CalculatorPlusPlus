@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="BackgroundBlack">
+        <item name="android:background">@color/black</item>
+    </style>
+
     <style name="NumberPad">
         <item name="android:background">@color/signal_black_700</item>
         <item name="android:clickable">true</item>

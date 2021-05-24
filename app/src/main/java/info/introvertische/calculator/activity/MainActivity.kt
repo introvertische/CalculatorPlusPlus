@@ -41,9 +41,14 @@ import kotlinx.android.synthetic.main.fragment_engineering_number_pad.*
 
 class MainActivity : AppCompatActivity(), ClickHandler {
 
+    private val mathLib = clbyi()
+
     private val basicNumberPadFragment = BasicNumberPadFragment()
     private val engineeringNumberPadFragment = EngineeringNumberPadFragment()
-    private val mathLib = clbyi()
+
+    private var answers = arrayListOf<String>()
+    private var expressions = arrayListOf<String>()
+
     private  lateinit var lastFragment: Fragment
     private var isHistory = false
     private var isEngineeringPad = false
@@ -129,6 +134,9 @@ class MainActivity : AppCompatActivity(), ClickHandler {
                 inputWindow.setText(outputText)
         }
         setCursorToEnd()
+
+        answers.add(outputText)
+        expressions.add(inputWindow.text.toString())
     }
 
     override fun sendData(id: Int, isInv: Boolean) {
@@ -184,7 +192,15 @@ class MainActivity : AppCompatActivity(), ClickHandler {
     }
 
     fun onClickHistory(view: View) {
+
+        val bundle = Bundle()
+        bundle.putStringArrayList("answer", answers)
+        bundle.putStringArrayList("expression", expressions)
+
         val historyPad = HistoryFragment()
+
+        historyPad.arguments = bundle
+
         isHistory = !isHistory
         if (instanceState == null) {
             supportFragmentManager
@@ -192,9 +208,9 @@ class MainActivity : AppCompatActivity(), ClickHandler {
                     .add(R.id.numberPad, historyPad, "history_pad")
                     .commit()
         }
-        if (isHistory)
+        if (isHistory) {
             replaceFragment(R.id.numberPad, historyPad)
-        else
+        } else
             replaceFragment(R.id.numberPad, lastFragment)
     }
 
