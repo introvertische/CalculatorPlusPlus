@@ -53,7 +53,12 @@ class Engine(
                 ConstantLib.MOD.const -> resultValue = mathManager.mod.calculate(firstFlag, secondFlag)
                 else -> ""
             }
-            return replace(mathExpr, expr, resultValue)
+            return if (firstFlag.indexOf("-") != -1 && resultValue.indexOf("-") == -1) {
+                replace(mathExpr, expr, "+$resultValue")
+            } else {
+                replace(mathExpr, expr, resultValue)
+            }
+
         } catch (exp: Exception) {
             return ConstantLib.INVALID_VALUE.const
         }

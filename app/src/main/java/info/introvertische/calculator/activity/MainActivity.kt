@@ -2,6 +2,7 @@ package info.introvertische.calculator.activity
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +17,7 @@ import info.introvertische.calculator.fragments.BasicNumberPadFragment
 import info.introvertische.calculator.fragments.EngineeringNumberPadFragment
 import info.introvertische.calculator.fragments.HistoryFragment
 import info.introvertische.calculator.interfaces.ClickHandler
-import info.introvertische.clbyi.clbyi
+import info.introvertische.clbyi.clbyiManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonAdditions
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonClosingParenthesis
@@ -38,14 +39,17 @@ import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonPow
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonSqrt
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonSubtractions
 import kotlinx.android.synthetic.main.fragment_engineering_number_pad.*
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity(), ClickHandler {
 
-    private val mathLib = clbyi()
+    private val mathLib = clbyiManager()
 
     private val basicNumberPadFragment = BasicNumberPadFragment()
     private val engineeringNumberPadFragment = EngineeringNumberPadFragment()
 
+    private var isFirstLaunch = true
+    private lateinit var characters: List<String>
     private var answers = arrayListOf<String>()
     private var expressions = arrayListOf<String>()
 
@@ -64,7 +68,6 @@ class MainActivity : AppCompatActivity(), ClickHandler {
         }
 
         instanceState = savedInstanceState
-        setCursorToEnd()
 
         lastFragment = if (instanceState == null && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             supportFragmentManager
@@ -76,21 +79,54 @@ class MainActivity : AppCompatActivity(), ClickHandler {
             replaceFragment(R.id.numberPad, engineeringNumberPadFragment)
             engineeringNumberPadFragment
         }
+
+        characters = arrayListOf(
+            getString(R.string.text_sign_additions),
+            getString(R.string.text_sign_multiplications),
+            getString(R.string.text_sign_divisions),
+            getString(R.string.text_sign_percent),
+            getString(R.string.text_sign_pow)
+        )
+        setCursorPosition()
     }
 
-    private fun setCursorToEnd() {
-        inputWindow.setSelection(inputWindow.text.toString().length)
+    private fun setCursorPosition(position: Int = -1) {
+        if (position == -1)
+            inputWindow.setSelection(inputWindow.text.toString().length)
+        else
+            inputWindow.setSelection(position)
     }
 
     private fun createMathExpression(text: String) {
-        inputWindow.append(text)
+        if (inputWindow.selectionStart == inputWindow.text.toString().length)
+            inputWindow.append(text)
+        else {
+            val cursorPosition = inputWindow.selectionStart
+            val inputText = StringBuilder().append(inputWindow.text.toString())
+            inputText.insert(cursorPosition, text)
+            inputWindow.setText(inputText.toString())
+            setCursorPosition(cursorPosition+1)
+        }
     }
 
     private fun deleteSymbol() {
         val text = inputWindow.text.toString()
-        if (text.isNotEmpty())
-            inputWindow.setText(text.substring(0, text.length - 1))
-        setCursorToEnd()
+        val cursorPosition  = inputWindow.selectionStart
+
+//        if (text.isNotEmpty())
+//            inputWindow.setText(text.substring(0, text.length - 1))
+        //setCursorToEnd()
+
+        // 1) try-catch
+        // 2) отслеживание курсора не первый символ
+        // 3) курсор на то место где был
+        if (text.isNotEmpty() && cursorPosition != 0) {
+            val start = text.substring(0, cursorPosition-1)
+            val end = text.substring(cursorPosition, text.length)
+            inputWindow.setText("$start$end")
+            setCursorPosition(cursorPosition - 1)
+        }
+
     }
 
     private fun addElementToWindow(buttonText: String, isStart: Boolean = false, isBracket: Boolean = false) {
@@ -99,44 +135,65 @@ class MainActivity : AppCompatActivity(), ClickHandler {
         if (inputText.isEmpty() && outputText.isNotEmpty()) {
             outputWindow.text = ""
             inputWindow.setText("$outputText$buttonText")
-            setCursorToEnd()
+            setCursorPosition()
         } else if (inputText.isNotEmpty() || isStart) {
-            if (buttonText == inputText.lastOrNull().toString() && !isBracket)
-                deleteSymbol()
-            else
+//            if (buttonText == inputText.lastOrNull().toString() && !isBracket)
+//                deleteSymbol()
+//            else
+//                createMathExpression(buttonText)
+
+            val cursorPosition = inputWindow.selectionStart
+            var start  = inputText.substring(0, cursorPosition)
+            val end = inputText.substring(cursorPosition, inputText.length)
+            val last = start.lastOrNull().toString()
+            if (characters.contains(last)){
+                if (buttonText != last){
+                    deleteSymbol()
+                    start = start.substring(0, start.length-1)
+                    inputWindow.setText("$start$buttonText$end")
+                    setCursorPosition(cursorPosition)
+                }
+            } else {
                 createMathExpression(buttonText)
+            }
         }
     }
 
     private fun outputToScreen() {
-        var outputText = ""
-        if (inputWindow.text.toString().isNotEmpty())
-            outputText = mathLib.toStart(
+        if (!isFirstLaunch && inputWindow.text.toString() == expressions[expressions.size-1]) {
+            inputWindow.setText(outputWindow.text)
+            outputWindow.text = ""
+        } else {
+            isFirstLaunch = false
+            var outputText = ""
+            if (inputWindow.text.toString().isNotEmpty())
+                outputText = mathLib.toStart(
                     inputWindow.text
-                            .toString()
-                            .replace(getString(R.string.text_sign_subtractions), "-")
-                            .replace(",", ".")
-            )
-        outputText = outputText
+                        .toString()
+                        .replace(getString(R.string.text_sign_subtractions), "-")
+                        .replace(",", ".")
+                )
+            outputText = outputText
                 .replace("-", getString(R.string.text_sign_subtractions))
                 .replace(".", ",")
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if (outputText == "f4e" || outputText == "f1b")
-                outputWindow.text = getString(R.string.invalid_expression)
-            else {
-                outputWindow.text = outputText
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                if (outputText == "f4e" || outputText == "f1b")
+                    outputWindow.text = getString(R.string.invalid_expression)
+                else
+                    outputWindow.text = outputText
+            } else {
+                if (outputText == "f4e" || outputText == "f1b")
+                    inputWindow.setText(getString(R.string.invalid_expression))
+                else
+                    inputWindow.setText(outputText)
             }
-        } else {
-            if (outputText == "f4e" || outputText == "f1b")
-                inputWindow.setText(getString(R.string.invalid_expression))
-            else
-                inputWindow.setText(outputText)
-        }
-        setCursorToEnd()
 
-        answers.add(outputText)
-        expressions.add(inputWindow.text.toString())
+            answers.add(outputText)
+            expressions.add(inputWindow.text.toString())
+
+        }
+        setCursorPosition()
     }
 
     override fun sendData(id: Int, isInv: Boolean) {
@@ -248,5 +305,10 @@ class MainActivity : AppCompatActivity(), ClickHandler {
                         DialogInterface.OnClickListener { dialog: DialogInterface, id: Int -> dialog.cancel() })
         val alert = builder.create()
         alert.show()
+    }
+
+    fun onClickIPCalculator(item: MenuItem?) {
+        val intent = Intent(this, IPActivity::class.java)
+        startActivity(intent)
     }
 }

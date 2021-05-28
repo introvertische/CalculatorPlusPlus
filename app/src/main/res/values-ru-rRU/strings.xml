@@ -8,4 +8,5 @@
     <string name="about_title">О программе</string>
     <string name="about_footer_text">© Alexey Radke, 2021.\n Все права защищены.</string>
     <string name="about_close">Закрыть</string>
+    <string name="menu_ip_calculator">IP Калькулятор</string>
 </resources>

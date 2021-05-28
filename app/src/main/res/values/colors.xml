@@ -14,4 +14,5 @@
     <color name="orange_500">#E76C30</color>
     <color name="red_500">#DD2020</color>
     <color name="gray_100">#c5c5c7</color>
+    <color name="gray_300">#808080</color>
 </resources>

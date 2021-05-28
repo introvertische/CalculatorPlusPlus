@@ -6,9 +6,16 @@
     tools:context=".activity.MainActivity">
 
     <item
+        android:id="@+id/action_ip_calculator"
+        android:orderInCategory="100"
+        android:title="@string/menu_ip_calculator"
+        app:showAsAction="never"
+        android:onClick="onClickIPCalculator">
+    </item>
+
+    <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
-        android:icon="@drawable/ii_about"
         android:title="@string/menu_about"
         app:showAsAction="never"
         android:onClick="onClickAbout">

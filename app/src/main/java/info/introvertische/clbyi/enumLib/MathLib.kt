@@ -19,5 +19,5 @@ enum class MathLib(val mathOperation: String) {
     MODULE("abs\\-?((\\d+\\.\\d+)|(\\d+))"),
     LN("ln((\\d+\\.\\d+)|(\\d+))"),
     LOG("log((\\d+\\.\\d+)|(\\d+))"),
-    FINAL_RESULT("^\\-?((\\d+\\.\\d+)|(\\d+))$")
+    FINAL_RESULT("^\\-?\\+?((\\d+\\.\\d+)|(\\d+))$")
 }

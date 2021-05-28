@@ -16,6 +16,7 @@
         <item name="popupMenuBackground">@color/signal_black_700</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:itemTextAppearance">@style/CustomMenuTextAppearance</item>
+        <item name="android:textColorHint">@color/gray_300</item>
     </style>
 
     <style name="CustomMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
