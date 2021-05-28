@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EngineeringNumberPadFragment">
+    tools:context=".fragments.BasicNumberPadFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
 
             <TextView
                 android:id="@+id/buttonClear"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -27,63 +27,26 @@
                 android:textColor="@color/red_500"/>
 
             <TextView
-                android:id="@+id/buttonLn"
-                android:theme="@style/NumberPad.Engineering"
+                android:id="@+id/buttonOpeningParenthesis"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_ln"/>
+                android:text="@string/text_sign_opening_parenthesis"/>
 
             <TextView
-                android:id="@+id/buttonPow"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonClosingParenthesis"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:onClick="onClick"
-                android:text="@string/text_sign_pow"/>
-
-            <TextView
-                android:id="@+id/buttonSin"
-                android:theme="@style/NumberPad.Engineering"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_sin"/>
-
-            <TextView
-                android:id="@+id/buttonNumberSeven"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_seven"/>
-
-            <TextView
-                android:id="@+id/buttonNumberEight"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_eight"/>
-
-            <TextView
-                android:id="@+id/buttonNumberNine"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_nine"/>
+                android:text="@string/text_sign_closing_parenthesis"/>
 
             <TextView
                 android:id="@+id/buttonDelete"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -92,9 +55,45 @@
                 android:textColor="@color/orange_500"
                 android:textSize="30sp"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/buttonPercent"
+                android:theme="@style/NumberPad.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="0.5dp"
+                android:text="@string/text_sign_percent"/>
+
+            <TextView
+                android:id="@+id/buttonSqrt"
+                android:theme="@style/NumberPad.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="0.5dp"
+                android:text="@string/text_sign_sqrt"/>
+
+            <TextView
+                android:id="@+id/buttonPow"
+                android:theme="@style/NumberPad.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="0.5dp"
+                android:onClick="onClick"
+                android:text="@string/text_sign_pow"/>
+
             <TextView
                 android:id="@+id/buttonDivisions"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,82 +110,35 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/buttonInv"
-                android:theme="@style/NumberPad.Engineering"
+                android:id="@+id/buttonNumberSeven"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_inv"/>
+                android:text="@string/text_number_seven"/>
 
             <TextView
-                android:id="@+id/buttonLog"
-                android:theme="@style/NumberPad.Engineering"
+                android:id="@+id/buttonNumberEight"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_log"/>
+                android:text="@string/text_number_eight"/>
 
             <TextView
-                android:id="@+id/buttonSqrt"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberNine"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_sqrt"/>
-
-
-            <TextView
-                android:id="@+id/buttonCos"
-                android:theme="@style/NumberPad.Engineering"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_cos"/>
-
-            <TextView
-                android:id="@+id/buttonNumberFour"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_four"/>
-
-            <TextView
-                android:id="@+id/buttonNumberFive"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_five"/>
-
-            <TextView
-                android:id="@+id/buttonNumberSix"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_six"/>
-
-
-            <TextView
-                android:id="@+id/buttonOpeningParenthesis"
-                android:theme="@style/NumberPad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_opening_parenthesis"/>
+                android:text="@string/text_number_nine"/>
 
             <TextView
                 android:id="@+id/buttonMultiplications"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -203,80 +155,35 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/buttonE"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberFour"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_e"/>
+                android:text="@string/text_number_four"/>
 
             <TextView
-                android:id="@+id/buttonFactorial"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberFive"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_factorial"/>
+                android:text="@string/text_number_five"/>
 
             <TextView
-                android:id="@+id/buttonCbrt"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberSix"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_cbrt"/>
-
-            <TextView
-                android:id="@+id/buttonTg"
-                android:theme="@style/NumberPad.Engineering"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_tg"/>
-
-            <TextView
-                android:id="@+id/buttonNumberOne"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_one"/>
-
-            <TextView
-                android:id="@+id/buttonNumberTwo"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_two"/>
-
-            <TextView
-                android:id="@+id/buttonNumberTree"
-                android:theme="@style/NumberPad.Digital"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_number_three"/>
-
-            <TextView
-                android:id="@+id/buttonClosingParenthesis"
-                android:theme="@style/NumberPad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_closing_parenthesis"/>
+                android:text="@string/text_number_six"/>
 
             <TextView
                 android:id="@+id/buttonSubtractions"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -293,44 +200,53 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/buttonPi"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberOne"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_pi"/>
+                android:text="@string/text_number_one"/>
 
             <TextView
-                android:id="@+id/buttonPercent"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonNumberTwo"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_percent"/>
+                android:text="@string/text_number_two"/>
 
             <TextView
-                android:id="@+id/buttonMod"
-                android:theme="@style/NumberPad.Engineering"
+                android:id="@+id/buttonNumberTree"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_mod"/>
+                android:text="@string/text_number_three"/>
 
             <TextView
-                android:id="@+id/buttonModule"
-                android:theme="@style/NumberPad"
+                android:id="@+id/buttonAdditions"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_module"/>
+                android:text="@string/text_sign_additions"
+                android:textColor="@color/orange_500"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/buttonNone"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -339,7 +255,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberZero"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -348,7 +264,7 @@
 
             <TextView
                 android:id="@+id/buttonComma"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -357,22 +273,12 @@
 
             <TextView
                 android:id="@+id/buttonEqual"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
                 android:text="@string/text_sign_equal"
-                android:textColor="@color/orange_500"/>
-
-            <TextView
-                android:id="@+id/buttonAdditions"
-                android:theme="@style/NumberPad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:text="@string/text_sign_additions"
                 android:textColor="@color/orange_500"/>
 
         </LinearLayout>

@@ -1,8 +1,10 @@
 package info.introvertische.calculator.activity
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +18,9 @@ import info.introvertische.calculator.R
 import info.introvertische.calculator.fragments.BasicNumberPadFragment
 import info.introvertische.calculator.fragments.EngineeringNumberPadFragment
 import info.introvertische.calculator.fragments.HistoryFragment
+import info.introvertische.calculator.interfaces.ClickDeleteHistory
 import info.introvertische.calculator.interfaces.ClickHandler
+import info.introvertische.calculator.interfaces.ClickListItem
 import info.introvertische.clbyi.clbyiManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonAdditions
@@ -40,8 +44,9 @@ import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonSqrt
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonSubtractions
 import kotlinx.android.synthetic.main.fragment_engineering_number_pad.*
 import java.lang.StringBuilder
+import kotlin.system.exitProcess
 
-class MainActivity : AppCompatActivity(), ClickHandler {
+class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, ClickListItem {
 
     private val mathLib = clbyiManager()
 
@@ -50,8 +55,8 @@ class MainActivity : AppCompatActivity(), ClickHandler {
 
     private var isFirstLaunch = true
     private lateinit var characters: List<String>
-    private var answers = arrayListOf<String>()
-    private var expressions = arrayListOf<String>()
+    private var answers: ArrayList<String> = arrayListOf()
+    private var expressions: ArrayList<String> = arrayListOf()
 
     private  lateinit var lastFragment: Fragment
     private var isHistory = false
@@ -88,6 +93,14 @@ class MainActivity : AppCompatActivity(), ClickHandler {
             getString(R.string.text_sign_pow)
         )
         setCursorPosition()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        answers = ArrayList(sharedPref.getString("answer", "")?.split(";"))
+        expressions = ArrayList(sharedPref.getString("expressions", "")?.split(";"))
     }
 
     private fun setCursorPosition(position: Int = -1) {
@@ -178,19 +191,21 @@ class MainActivity : AppCompatActivity(), ClickHandler {
                 .replace(".", ",")
 
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                if (outputText == "f4e" || outputText == "f1b")
+                if (outputText.indexOf("fae") != -1)
                     outputWindow.text = getString(R.string.invalid_expression)
                 else
                     outputWindow.text = outputText
             } else {
-                if (outputText == "f4e" || outputText == "f1b")
+                if (outputText.indexOf("fae") != -1)
                     inputWindow.setText(getString(R.string.invalid_expression))
                 else
                     inputWindow.setText(outputText)
             }
 
-            answers.add(outputText)
-            expressions.add(inputWindow.text.toString())
+            if (inputWindow.text.toString().isNotEmpty() && outputWindow.text.toString().isNotEmpty()) {
+                answers.add(outputText)
+                expressions.add(inputWindow.text.toString())
+            }
 
         }
         setCursorPosition()
@@ -273,7 +288,6 @@ class MainActivity : AppCompatActivity(), ClickHandler {
 
     fun toChangeLayout(view: View) {
         val engineeringNumberPad = EngineeringNumberPadFragment()
-        lastFragment = engineeringNumberPad
         isEngineeringPad = !isEngineeringPad
         if (instanceState == null) {
             supportFragmentManager
@@ -281,10 +295,14 @@ class MainActivity : AppCompatActivity(), ClickHandler {
                     .add(R.id.numberPad, engineeringNumberPad, "engineering_pad")
                     .commit()
         }
-        if (isEngineeringPad)
+        if (isEngineeringPad) {
             replaceFragment(R.id.numberPad, engineeringNumberPad)
-        else
+            lastFragment = engineeringNumberPad
+        }
+        else {
             replaceFragment(R.id.numberPad, basicNumberPadFragment)
+            lastFragment = basicNumberPadFragment
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -311,4 +329,44 @@ class MainActivity : AppCompatActivity(), ClickHandler {
         val intent = Intent(this, IPActivity::class.java)
         startActivity(intent)
     }
+
+    override fun deleteHistory(isDelete: Boolean) {
+        if (isDelete) {
+            answers = arrayListOf()
+            expressions = arrayListOf()
+            saveHistory()
+            replaceFragment(R.id.numberPad, lastFragment)
+            isFirstLaunch = true
+        }
+    }
+
+    override fun listItemPosition(position: Int) {
+        inputWindow.setText(expressions[position])
+        setCursorPosition()
+    }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        super.onBackPressed()
+        System.runFinalizersOnExit(true);
+        exitProcess(0);
+    }
+
+    private fun saveHistory() {
+        val answerString = answers.joinToString(";")
+        val expressionsString = expressions.joinToString(";")
+
+        val sharedPref= this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("answer", answerString)
+            putString("expressions", expressionsString)
+            apply()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveHistory()
+    }
+
 }

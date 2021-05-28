@@ -18,7 +18,7 @@
 
             <TextView
                 android:id="@+id/buttonClear"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/buttonLn"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/buttonPow"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/buttonSin"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberSeven"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -65,7 +65,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberEight"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -74,7 +74,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberNine"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -83,7 +83,7 @@
 
             <TextView
                 android:id="@+id/buttonDelete"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/buttonDivisions"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -112,7 +112,7 @@
 
             <TextView
                 android:id="@+id/buttonInv"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/buttonLog"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -130,7 +130,7 @@
 
             <TextView
                 android:id="@+id/buttonSqrt"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -140,7 +140,7 @@
 
             <TextView
                 android:id="@+id/buttonCos"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -149,7 +149,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberFour"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -158,7 +158,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberFive"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -167,17 +167,16 @@
 
             <TextView
                 android:id="@+id/buttonNumberSix"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
                 android:text="@string/text_number_six"/>
 
-
             <TextView
                 android:id="@+id/buttonOpeningParenthesis"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -186,7 +185,7 @@
 
             <TextView
                 android:id="@+id/buttonMultiplications"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -204,7 +203,7 @@
 
             <TextView
                 android:id="@+id/buttonE"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -213,7 +212,7 @@
 
             <TextView
                 android:id="@+id/buttonFactorial"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -222,7 +221,7 @@
 
             <TextView
                 android:id="@+id/buttonCbrt"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -231,7 +230,7 @@
 
             <TextView
                 android:id="@+id/buttonTg"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -240,7 +239,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberOne"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -249,7 +248,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberTwo"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -258,7 +257,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberTree"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -267,7 +266,7 @@
 
             <TextView
                 android:id="@+id/buttonClosingParenthesis"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -276,7 +275,7 @@
 
             <TextView
                 android:id="@+id/buttonSubtractions"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -294,7 +293,7 @@
 
             <TextView
                 android:id="@+id/buttonPi"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -303,7 +302,7 @@
 
             <TextView
                 android:id="@+id/buttonPercent"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -312,7 +311,7 @@
 
             <TextView
                 android:id="@+id/buttonMod"
-                android:theme="@style/NumberPad.Engineering"
+                android:theme="@style/NumberPad.Engineering.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -321,7 +320,7 @@
 
             <TextView
                 android:id="@+id/buttonModule"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -330,7 +329,7 @@
 
             <TextView
                 android:id="@+id/buttonNone"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -339,7 +338,7 @@
 
             <TextView
                 android:id="@+id/buttonNumberZero"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -348,16 +347,18 @@
 
             <TextView
                 android:id="@+id/buttonComma"
-                android:theme="@style/NumberPad.Digital"
+                android:theme="@style/NumberPad.Digital.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
                 android:text="@string/text_sign_comma"/>
 
+
+
             <TextView
                 android:id="@+id/buttonEqual"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -367,7 +368,7 @@
 
             <TextView
                 android:id="@+id/buttonAdditions"
-                android:theme="@style/NumberPad"
+                android:theme="@style/NumberPad.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

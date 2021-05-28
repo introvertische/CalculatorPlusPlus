@@ -1,17 +1,23 @@
 package info.introvertische.calculator.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
 import androidx.fragment.app.Fragment
 import info.introvertische.calculator.R
+import info.introvertische.calculator.interfaces.ClickDeleteHistory
+import info.introvertische.calculator.interfaces.ClickListItem
+import java.lang.Exception
 
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), View.OnClickListener {
+
+    private lateinit var clickDeleteHistory: ClickDeleteHistory
+    private lateinit var clickListItem: ClickListItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,7 +44,29 @@ class HistoryFragment : Fragment() {
 
         listHistory.adapter = simpleAdapter
 
+        val buttonDelete: ImageView = rootView.findViewById(R.id.buttonDeleteHistory)
+
+        buttonDelete.setOnClickListener(this)
+        listHistory.onItemClickListener =
+            OnItemClickListener { parent, itemClicked, position, id ->
+                try {
+                    clickListItem.listItemPosition((listContext?.size ?: 0) - position - 1)
+                } catch (exp: Exception) {
+
+                }
+            }
+
         return rootView
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        clickDeleteHistory = context as ClickDeleteHistory
+        clickListItem = context as ClickListItem
+    }
+
+    override fun onClick(v: View?) {
+        clickDeleteHistory.deleteHistory(true)
     }
 
 }
