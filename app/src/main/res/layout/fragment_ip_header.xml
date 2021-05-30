@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/IpBackground"
+    tools:context=".fragments.IpHeaderFragment">
+
+    <TextView
+        android:id="@+id/textIP"
+        android:theme="@style/IPContextTextColor.TextSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/white"
+        android:text="@string/text_ip_address"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/containerInputIp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/textIP"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <EditText
+            android:id="@+id/editInputFirstIp"
+            android:theme="@style/IPContextEdit.Ip"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:hint="@string/text_ip_hint_one"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:theme="@style/IPContextDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_dot"/>
+
+        <EditText
+            android:id="@+id/editInputSecondIp"
+            android:theme="@style/IPContextEdit.Ip"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:hint="@string/text_ip_hint_two"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:theme="@style/IPContextDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_dot"/>
+
+        <EditText
+            android:id="@+id/editInputThirdIp"
+            android:theme="@style/IPContextEdit.Ip"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:hint="@string/text_ip_hint_tree"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:theme="@style/IPContextDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_dot"/>
+
+        <EditText
+            android:id="@+id/editInputFourthIp"
+            android:theme="@style/IPContextEdit.Ip"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="@string/text_ip_hint_tree"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textMask"
+        android:theme="@style/IPContextTextColor.TextSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:text="@string/text_mask"
+        app:layout_constraintTop_toBottomOf="@id/containerInputIp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinnerMask"
+        android:theme="@style/IPContextTextColor.TextSize"
+        android:backgroundTint="@color/signal_black_400"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:entries="@array/spinner_mask"
+        app:layout_constraintTop_toBottomOf="@id/containerInputIp"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/textId"
+        android:theme="@style/IPContextTextColor.TextSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:text="@string/text_id"
+        app:layout_constraintTop_toBottomOf="@id/textMask"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Switch
+        android:id="@+id/switchNetworkIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:trackTint="@color/white"
+        android:text="@string/text_switch_id"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textId"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/textOutputId"
+        android:theme="@style/IPContextTextColor.TextSize"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="viewEnd"
+        app:layout_constraintTop_toBottomOf="@id/textMask"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextId"
+        android:theme="@style/IPContextEdit"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:hint="@string/hint_id"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/textMask"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:backgroundTint="@color/signal_black_700"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/button_calculate"
+        android:textAllCaps="false"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/switchNetworkIp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ enum class MathLib(val mathOperation: String) {
     TG("tg((\\d+\\.\\d+)|(\\d+))"),
     ARCTG("tg⁻¹((\\d+\\.\\d+)|(\\d+))"),
     FACTORIAL("((\\d+\\.\\d+)|(\\d+))\\!"),
-    MOD("((\\d+\\.\\d+)|(\\d+))mod((\\d+\\.\\d+)|(\\d+))"),
+    MOD("\\-?((\\d+\\.\\d+)|(\\d+))mod\\-?((\\d+\\.\\d+)|(\\d+))"),
     MODULE("abs\\-?((\\d+\\.\\d+)|(\\d+))"),
     LN("ln((\\d+\\.\\d+)|(\\d+))"),
     LOG("log((\\d+\\.\\d+)|(\\d+))"),

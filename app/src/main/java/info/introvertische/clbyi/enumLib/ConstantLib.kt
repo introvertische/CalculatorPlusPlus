@@ -22,6 +22,6 @@ enum class ConstantLib(val const: String) {
     MODULE("abs"),
     LOG("log"),
     LN("ln"),
-    INVALID_VALUE("fae"),
-    INVALID_EXPRESSION("fae")
+    INVALID_VALUE("FAE"),
+    INVALID_EXPRESSION("FAE")
 }

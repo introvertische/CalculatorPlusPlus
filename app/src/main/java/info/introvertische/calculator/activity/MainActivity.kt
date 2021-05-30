@@ -160,11 +160,13 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             val end = inputText.substring(cursorPosition, inputText.length)
             val last = start.lastOrNull().toString()
             if (characters.contains(last)){
-                if (buttonText != last){
+                if (buttonText != last && characters.contains(buttonText)){
                     deleteSymbol()
                     start = start.substring(0, start.length-1)
                     inputWindow.setText("$start$buttonText$end")
                     setCursorPosition(cursorPosition)
+                } else {
+                    createMathExpression(buttonText)
                 }
             } else {
                 createMathExpression(buttonText)
@@ -173,7 +175,11 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     }
 
     private fun outputToScreen() {
-        if (!isFirstLaunch && inputWindow.text.toString() == expressions[expressions.size-1]) {
+        if (
+            !isFirstLaunch &&
+            inputWindow.text.toString() == expressions[expressions.size-1] &&
+            outputWindow.text.isNotEmpty()
+        ) {
             inputWindow.setText(outputWindow.text)
             outputWindow.text = ""
         } else {
@@ -191,12 +197,12 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
                 .replace(".", ",")
 
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                if (outputText.indexOf("fae") != -1)
+                if (outputText.indexOf("FAE") != -1)
                     outputWindow.text = getString(R.string.invalid_expression)
                 else
                     outputWindow.text = outputText
             } else {
-                if (outputText.indexOf("fae") != -1)
+                if (outputText.indexOf("FAE") != -1)
                     inputWindow.setText(getString(R.string.invalid_expression))
                 else
                     inputWindow.setText(outputText)
@@ -208,6 +214,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             }
 
         }
+        saveHistory()
         setCursorPosition()
     }
 
@@ -342,6 +349,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 
     override fun listItemPosition(position: Int) {
         inputWindow.setText(expressions[position])
+        outputWindow.text = ""
         setCursorPosition()
     }
 
@@ -363,10 +371,4 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             apply()
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        saveHistory()
-    }
-
 }

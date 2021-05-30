@@ -250,10 +250,14 @@ class Engine(
             val decimalFormat = DecimalFormat(FormatLib.DECIMAL_FORMAT.value)
             decimalFormat.roundingMode = RoundingMode.CEILING
             val result = value.split(".")
-            if (result[1].toLong() != 0.toLong())
-                decimalFormat.format(value.toDouble()).toString()
-            else
-                result[0]
+            if (result.size != 1) {
+                if (result[1].toLong() != 0.toLong())
+                    decimalFormat.format(value.toDouble()).toString()
+                else
+                    result[0].toInt().toString()
+            } else {
+                value.toInt().toString()
+            }
         } catch (exp: Exception) {
             value
         }

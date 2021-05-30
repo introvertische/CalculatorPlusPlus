@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Калькулятор++</string>
-    <string name="app_version">Версия 1.0</string>
+    <string name="app_version">Версия 1.2</string>
     <string name="invalid_expression">Неверное выражение</string>
     <string name="invalid_expression_two">Проблема со скобками</string>
     <string name="menu_about">О программе</string>

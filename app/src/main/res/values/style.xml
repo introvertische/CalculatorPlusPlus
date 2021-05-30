@@ -69,7 +69,14 @@
         <item name="android:windowBackground">@color/signal_black_400</item>
     </style>
 
+
+
     <!-- IP Activity -->
+    <style name="IpBackground">
+        <item name="android:background">@color/black</item>
+    </style>
+
+
     <style name="IPBackgroundContext">
         <item name="android:background">@color/gray_300</item>
     </style>
