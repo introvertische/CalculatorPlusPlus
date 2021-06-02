@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/MainBackground"
+    android:theme="@style/AppBackground"
     tools:context=".activity.MainActivity">
 
     <HorizontalScrollView
@@ -31,7 +31,6 @@
 
     <EditText
         android:id="@+id/inputWindow"
-        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -101,6 +100,5 @@
         android:id="@+id/numberPad"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </LinearLayout>

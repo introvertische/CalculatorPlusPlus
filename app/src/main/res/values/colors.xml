@@ -11,6 +11,7 @@
     <!-- My colors -->
     <color name="signal_black_700">#2b2b2b</color>
     <color name="signal_black_400">#424242</color>
+    <color name="signal_black_500">#3d4041</color>
     <color name="orange_500">#E76C30</color>
     <color name="red_500">#DD2020</color>
     <color name="gray_100">#c5c5c7</color>
