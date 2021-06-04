@@ -4,6 +4,7 @@
     <string name="invalid_expression">Invalid expression</string>
     <string name="invalid_expression_two">Problem with brackets</string>
     <string name="menu_about">About</string>
+    <string name="switch_theme">Switch theme</string>
     <string name="menu_ip_calculator">IP Calculator</string>
 
     <!-- Number pad -->

@@ -13,9 +13,17 @@
 <!--        android:onClick="onClickIPCalculator">-->
 <!--    </item>-->
 
+<!--    <item-->
+<!--        android:id="@+id/action_switch_theme"-->
+<!--        android:orderInCategory="101"-->
+<!--        android:title="@string/switch_theme"-->
+<!--        app:showAsAction="never"-->
+<!--        android:onClick="switchTheme">-->
+<!--    </item>-->
+
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:title="@string/menu_about"
         app:showAsAction="never"
         android:onClick="onClickAbout">

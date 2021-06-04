@@ -179,7 +179,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_opening_parenthesis"/>
+                android:text="@string/text_sign_opening_parenthesis"
+                android:textSize="22dp"/>
 
             <TextView
                 android:id="@+id/buttonMultiplications"
@@ -268,7 +269,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:text="@string/text_sign_closing_parenthesis"/>
+                android:text="@string/text_sign_closing_parenthesis"
+                android:textSize="22dp"/>
 
             <TextView
                 android:id="@+id/buttonSubtractions"

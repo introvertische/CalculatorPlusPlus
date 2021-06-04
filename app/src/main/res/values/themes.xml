@@ -63,6 +63,7 @@
     </style>
 
     <style name="SmallBasicPad.InvColor" parent="BasicPad.InvColor">
+        <item name="android:textSize">26sp</item>
     </style>
 
     <style name="SmallBasicSPad.Color">
