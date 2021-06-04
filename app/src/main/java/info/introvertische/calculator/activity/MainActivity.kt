@@ -10,10 +10,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import info.introvertische.calculator.BuildConfig
 import info.introvertische.calculator.R
 import info.introvertische.calculator.fragments.BasicNumberPadFragment
 import info.introvertische.calculator.fragments.EngineeringNumberPadFragment
@@ -23,6 +25,7 @@ import info.introvertische.calculator.interfaces.ClickHandler
 import info.introvertische.calculator.interfaces.ClickListItem
 import info.introvertische.clbyi.clbyiManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_about.*
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonAdditions
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonClosingParenthesis
 import kotlinx.android.synthetic.main.fragment_basic_number_pad.buttonComma

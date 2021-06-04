@@ -175,7 +175,7 @@
 
             <TextView
                 android:id="@+id/buttonOpeningParenthesis"
-                android:theme="@style/BasicPad.Color"
+                android:theme="@style/BasicPad.InvColor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -264,7 +264,7 @@
 
             <TextView
                 android:id="@+id/buttonClosingParenthesis"
-                android:theme="@style/BasicPad.Color"
+                android:theme="@style/BasicPad.InvColor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

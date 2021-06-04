@@ -42,7 +42,7 @@ class HistoryFragment : Fragment(), View.OnClickListener {
         val from: Array<String> = arrayOf("title", "context")
         val to: IntArray = intArrayOf(R.id.listItemTitle, R.id.listItemContext)
 
-        val simpleAdapter: SimpleAdapter = SimpleAdapter(inflater.context, data, R.layout.list_item, from, to)
+        val simpleAdapter: SimpleAdapter = SimpleAdapter(inflater.context, data, R.layout.list_item_history, from, to)
 
         listHistory.adapter = simpleAdapter
 

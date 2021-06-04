@@ -56,9 +56,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="SmallBasicPad.InvColor">
-        <item name="android:background">@color/gray_300</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="SmallBasicPad.InvColor" parent="BasicPad.InvColor">
     </style>
 
     <style name="SmallBasicSPad.Color">
