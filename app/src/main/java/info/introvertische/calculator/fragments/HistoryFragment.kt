@@ -30,7 +30,9 @@ class HistoryFragment : Fragment(), View.OnClickListener {
         val data: ArrayList<HashMap<String, String>> = arrayListOf()
         var m: HashMap<String, String>
 
-        for (i in listTitle?.lastIndex!! downTo 0) {
+        val index = if (listTitle!!.size > 1) 1 else 0
+
+        for (i in listTitle?.lastIndex!! downTo index) {
             m = hashMapOf()
             m["title"] = listTitle[i]
             m["context"] = listContext!![i]

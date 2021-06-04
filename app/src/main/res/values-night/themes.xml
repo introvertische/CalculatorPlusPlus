@@ -27,6 +27,7 @@
         <item name="android:textSize">17sp</item>
     </style>
 
+    <!-- Basic pad -->
     <style name="BasicPad.Color">
         <item name="android:background">@color/signal_black_700</item>
     </style>
@@ -35,4 +36,48 @@
         <item name="android:background">@color/orange_500</item>
     </style>
 
+    <style name="BasicPad.InvColor">
+        <item name="android:background">@color/gray_300</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Basic S pad -->
+    <style name="BasicSPad.Color">
+        <item name="android:background">@color/signal_black_700</item>
+    </style>
+
+    <!-- Small size-->
+    <style name="SmallBasicPad.Color">
+        <item name="android:background">@color/signal_black_700</item>
+    </style>
+
+    <style name="SmallBasicPad.SpecialColor">
+        <item name="android:background">@color/orange_500</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SmallBasicPad.InvColor">
+        <item name="android:background">@color/gray_300</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SmallBasicSPad.Color">
+        <item name="android:background">@color/signal_black_700</item>
+    </style>
+
+    <!-- History background color -->
+    <style name="HistoryBackground">
+        <item name="android:background">@color/gray_300</item>
+        <item name="android:backgroundTint">@color/signal_black_700</item>
+    </style>
+
+     <!-- About theme -->
+    <style name="TemplDialog" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">@color/signal_black_400</item>
+    </style>
+
+    <style name="AboutBackground">
+        <item name="android:background">@color/signal_black_400</item>
+        <item name="android:textColorLink">@color/blue_100</item>
+    </style>
 </resources>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/AboutBackground"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/signal_black_400"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -18,7 +18,6 @@
         app:layout_constraintBottom_toTopOf="@id/footerAbout">
 
         <TextView
-            android:theme="@style/DialogAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -27,7 +26,6 @@
             android:textSize="14sp" />
 
         <TextView
-            android:theme="@style/DialogAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -38,7 +36,6 @@
 
     <TextView
         android:id="@+id/footerAbout"
-        android:theme="@style/DialogAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_footer_text"

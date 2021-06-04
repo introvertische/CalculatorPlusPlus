@@ -18,7 +18,7 @@ tools:context=".fragments.EngineeringNumberPadFragment">
 
         <TextView
             android:id="@+id/buttonInv"
-            android:theme="@style/BasicSPad"
+            android:theme="@style/BasicUPad"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -27,7 +27,7 @@ tools:context=".fragments.EngineeringNumberPadFragment">
 
         <TextView
             android:id="@+id/buttonSin"
-            android:theme="@style/BasicSPad"
+            android:theme="@style/BasicUPad"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -36,7 +36,7 @@ tools:context=".fragments.EngineeringNumberPadFragment">
 
         <TextView
             android:id="@+id/buttonCos"
-            android:theme="@style/BasicSPad"
+            android:theme="@style/BasicUPad"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -45,7 +45,7 @@ tools:context=".fragments.EngineeringNumberPadFragment">
 
         <TextView
             android:id="@+id/buttonTg"
-            android:theme="@style/BasicSPad"
+            android:theme="@style/BasicUPad"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,7 +54,7 @@ tools:context=".fragments.EngineeringNumberPadFragment">
 
         <TextView
             android:id="@+id/buttonMod"
-            android:theme="@style/BasicSPad"
+            android:theme="@style/BasicUPad"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

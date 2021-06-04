@@ -16,4 +16,6 @@
     <color name="red_500">#DD2020</color>
     <color name="gray_100">#c5c5c7</color>
     <color name="gray_300">#808080</color>
+    <color name="black_500">#121212</color>
+    <color name="blue_100">#ABCDEF</color>
 </resources>

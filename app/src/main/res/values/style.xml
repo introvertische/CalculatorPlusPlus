@@ -9,10 +9,6 @@
         <item name="android:textSize">40sp</item>
     </style>
 
-    <style name="BasicSPad" parent="BasicPad">
-        <item name="android:textSize">30sp</item>
-    </style>
-
 <!--    <style name="BasicPad.Engineering.Background">-->
 <!--&lt;!&ndash;        <item name="android:textSize">30sp</item>&ndash;&gt;-->
 <!--    </style>-->
@@ -21,8 +17,20 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="BasicSPad" parent="BasicPad">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="BasicUPad" parent="BasicSPad">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <!-- Small size-->
     <style name="SmallBasicPad" parent="BasicPad">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="BasicPad.Digital.Small">
         <item name="android:textSize">30sp</item>
     </style>
 
@@ -30,8 +38,8 @@
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="BasicPad.Digital.Small">
-        <item name="android:textSize">30sp</item>
+    <style name="SmallBasicUPad" parent="SmallBasicSPad">
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <!-- Other -->
@@ -39,6 +47,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/signal_black_700</item>
+        <item name="android:backgroundTint">@color/signal_black_700</item>
     </style>
 
     <style name="ListViewItem">
@@ -50,10 +59,6 @@
 
     <style name="DialogAbout">
         <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="CustomDialog" parent="android:Theme.Material.Dialog.Alert">
-        <item name="android:windowBackground">@color/signal_black_400</item>
     </style>
 
     <!-- IP Activity -->

@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +13,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import info.introvertische.calculator.R
 import info.introvertische.calculator.fragments.BasicNumberPadFragment
 import info.introvertische.calculator.fragments.EngineeringNumberPadFragment
@@ -277,20 +277,27 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         bundle.putStringArrayList("expression", expressions)
 
         val historyPad = HistoryFragment()
+        val transaction = supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
 
         historyPad.arguments = bundle
 
         isHistory = !isHistory
         if (instanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.numberPad, historyPad, "history_pad")
-                    .commit()
+            transaction.add(R.id.numberPad, historyPad, "history_pad")
         }
+
         if (isHistory) {
-            replaceFragment(R.id.numberPad, historyPad)
-        } else
-            replaceFragment(R.id.numberPad, lastFragment)
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            transaction.replace(R.id.numberPad, historyPad)
+            //replaceFragment(R.id.numberPad, historyPad)
+        } else{
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            transaction.replace(R.id.numberPad, lastFragment)
+            //replaceFragment(R.id.numberPad, lastFragment)
+        }
+        transaction.commit()
     }
 
     fun toChangeLayout(view: View) {
@@ -318,7 +325,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     }
 
     fun onClickAbout(item: MenuItem?) {
-        val builder = AlertDialog.Builder(this@MainActivity, R.style.CustomDialog)
+        val builder = AlertDialog.Builder(this@MainActivity, R.style.TemplDialog)
         val view = layoutInflater
                 .inflate(R.layout.dialog_about, null) as ConstraintLayout
         builder
