@@ -60,18 +60,13 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     private lateinit var characters: List<String>
     private var answers: ArrayList<String> = arrayListOf()
     private var expressions: ArrayList<String> = arrayListOf()
+    private var historyMap: LinkedHashMap<String, String> = linkedMapOf()
 
     private  lateinit var lastFragment: Fragment
     private var isHistory = false
     private var isEngineeringPad = false
     private var isNightMode = true
     private var instanceState: Bundle? = null
-
-
-    init {
-
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +112,6 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 
         override fun afterTextChanged(s: Editable?) {
             val result = mathLibCalculate()
-            //val result = "Result"
             if (result == "FAE") {
                 outputWindow.text = ""
             } else {
@@ -127,11 +121,15 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 
     }
 
+    //TODO Implement the transition from two lists to one map
     override fun onStart() {
         super.onStart()
-        val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
         answers = ArrayList(sharedPref.getString("answer", "")?.split(";"))
         expressions = ArrayList(sharedPref.getString("expressions", "")?.split(";"))
+        for (i in 0 until answers.size) {
+            historyMap[expressions[i]] = answers[i]
+        }
     }
 
     private fun setCursorPosition(position: Int = -1) {
@@ -215,26 +213,40 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             outputWindow.text = ""
         } else {
             isFirstLaunch = false
+            val inputText = inputWindow.text.toString()
             var outputText = ""
-            if (inputWindow.text.toString().isNotEmpty())
-               // outputText = mathLibCalculate()
 
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                if (outputText.indexOf("FAE") != -1)
-                    outputWindow.text = getString(R.string.invalid_expression)
-                else
-                    outputWindow.text = outputText
-            } else {
-                if (outputText.indexOf("FAE") != -1)
+            if (inputText.isNotEmpty()) {
+                outputText = if (outputWindow.text.isNotEmpty()) {
+                    outputWindow.text.toString();
+                } else {
+                    mathLibCalculate()
+                }
+            }
+
+            if (outputText.indexOf("FAE") != -1)
                     inputWindow.setText(getString(R.string.invalid_expression))
                 else
                     inputWindow.setText(outputText)
-            }
 
-            if (inputWindow.text.toString().isNotEmpty() && outputWindow.text.toString().isNotEmpty()) {
-                answers.add(outputText)
-                expressions.add(inputWindow.text.toString())
-            }
+
+//            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                if (outputText.indexOf("FAE") != -1)
+//                    outputWindow.text = getString(R.string.invalid_expression)
+//                else
+//                    outputWindow.text = outputText
+//            } else {
+//                if (outputText.indexOf("FAE") != -1)
+//                    inputWindow.setText(getString(R.string.invalid_expression))
+//                else
+//                    inputWindow.setText(outputText)
+//            }
+
+//            if (inputWindow.text.toString().isNotEmpty() && outputWindow.text.toString().isNotEmpty()) {
+//
+//            }
+            historyMap[inputText] = outputText
+            outputWindow.text = ""
 
         }
         saveHistory()
@@ -320,14 +332,15 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         transaction.commit()
     }
 
+    //TODO Fix non-saving history
     private fun saveHistory() {
-        val answerString = answers.joinToString(";")
-        val expressionsString = expressions.joinToString(";")
+        val answer = historyMap.keys.joinToString(";")
+        val expressions = historyMap.values.joinToString(";")
 
-        val sharedPref= this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref= this.getPreferences(Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
-            putString("answer", answerString)
-            putString("expressions", expressionsString)
+            putString("answer", answer)
+            putString("expressions", expressions)
             apply()
         }
     }
@@ -411,6 +424,4 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         System.runFinalizersOnExit(true);
         exitProcess(0);
     }
-
-
 }

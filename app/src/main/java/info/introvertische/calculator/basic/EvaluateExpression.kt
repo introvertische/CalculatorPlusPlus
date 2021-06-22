@@ -118,8 +118,6 @@ class EvaluateExpression {
                 }
 
                 val subExpressionString = subExpression.joinToString("")
-                //val result = searchExpressionsEngine(subExpressionString)
-                //mathExpr = replace(mathExpr, "($subExpressionString)", result)
                 val result = mainCalculate(subExpressionString)
                 mathExpr = replace(mathExpr, "($subExpressionString)", result)
             }
