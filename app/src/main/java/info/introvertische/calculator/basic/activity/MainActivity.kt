@@ -6,9 +6,12 @@ import android.content.DialogInterface
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -64,16 +67,21 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     private var isNightMode = true
     private var instanceState: Bundle? = null
 
+
+    init {
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        instanceState = savedInstanceState
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             inputWindow.showSoftInputOnFocus = false;
             R.layout.activity_main
         }
-
-        instanceState = savedInstanceState
 
         lastFragment = if (instanceState == null && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             supportFragmentManager
@@ -93,12 +101,34 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             getString(R.string.text_sign_percent),
             getString(R.string.text_sign_pow)
         )
+
+        inputWindow.addTextChangedListener(inputWatcher)
         setCursorPosition()
+    }
+
+    private val inputWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            outputWindow.text = ""
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            outputWindow.text = ""
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            val result = mathLibCalculate()
+            //val result = "Result"
+            if (result == "FAE") {
+                outputWindow.text = ""
+            } else {
+                outputWindow.text = result
+            }
+        }
+
     }
 
     override fun onStart() {
         super.onStart()
-
         val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
         answers = ArrayList(sharedPref.getString("answer", "")?.split(";"))
         expressions = ArrayList(sharedPref.getString("expressions", "")?.split(";"))
@@ -126,14 +156,6 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     private fun deleteSymbol() {
         val text = inputWindow.text.toString()
         val cursorPosition  = inputWindow.selectionStart
-
-//        if (text.isNotEmpty())
-//            inputWindow.setText(text.substring(0, text.length - 1))
-        //setCursorToEnd()
-
-        // 1) try-catch
-        // 2) отслеживание курсора не первый символ
-        // 3) курсор на то место где был
         if (text.isNotEmpty() && cursorPosition != 0) {
             val start = text.substring(0, cursorPosition-1)
             val end = text.substring(cursorPosition, text.length)
@@ -151,11 +173,6 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             inputWindow.setText("$outputText$buttonText")
             setCursorPosition()
         } else if (inputText.isNotEmpty() || isStart) {
-//            if (buttonText == inputText.lastOrNull().toString() && !isBracket)
-//                deleteSymbol()
-//            else
-//                createMathExpression(buttonText)
-
             val cursorPosition = inputWindow.selectionStart
             var start  = inputText.substring(0, cursorPosition)
             val end = inputText.substring(cursorPosition, inputText.length)
@@ -175,6 +192,19 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         }
     }
 
+    private fun mathLibCalculate() : String {
+        var outputText = mathLib.start(
+            inputWindow.text
+                .toString()
+                .replace(getString(R.string.text_sign_subtractions), "-")
+                .replace(",", ".")
+        )
+        outputText = outputText
+            .replace("-", getString(R.string.text_sign_subtractions))
+            .replace(".", ",")
+        return outputText
+    }
+
     private fun outputToScreen() {
         if (
             !isFirstLaunch &&
@@ -187,15 +217,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             isFirstLaunch = false
             var outputText = ""
             if (inputWindow.text.toString().isNotEmpty())
-                outputText = mathLib.start(
-                    inputWindow.text
-                        .toString()
-                        .replace(getString(R.string.text_sign_subtractions), "-")
-                        .replace(",", ".")
-                )
-            outputText = outputText
-                .replace("-", getString(R.string.text_sign_subtractions))
-                .replace(".", ",")
+               // outputText = mathLibCalculate()
 
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 if (outputText.indexOf("FAE") != -1)
@@ -272,19 +294,18 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     }
 
     fun onClickHistory(view: View) {
-
         val bundle = Bundle()
-        bundle.putStringArrayList("answer", answers)
-        bundle.putStringArrayList("expression", expressions)
-
         val historyPad = HistoryFragment()
         val transaction = supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
 
+        bundle.putStringArrayList("answer", answers)
+        bundle.putStringArrayList("expression", expressions)
         historyPad.arguments = bundle
 
         isHistory = !isHistory
+
         if (instanceState == null) {
             transaction.add(R.id.numberPad, historyPad, "history_pad")
         }
@@ -292,13 +313,33 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         if (isHistory) {
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             transaction.replace(R.id.numberPad, historyPad)
-            //replaceFragment(R.id.numberPad, historyPad)
         } else{
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             transaction.replace(R.id.numberPad, lastFragment)
-            //replaceFragment(R.id.numberPad, lastFragment)
         }
         transaction.commit()
+    }
+
+    private fun saveHistory() {
+        val answerString = answers.joinToString(";")
+        val expressionsString = expressions.joinToString(";")
+
+        val sharedPref= this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("answer", answerString)
+            putString("expressions", expressionsString)
+            apply()
+        }
+    }
+
+    override fun deleteHistory(isDelete: Boolean) {
+        if (isDelete) {
+            answers = arrayListOf()
+            expressions = arrayListOf()
+            saveHistory()
+            replaceFragment(R.id.numberPad, lastFragment)
+            isFirstLaunch = true
+        }
     }
 
     fun toChangeLayout(view: View) {
@@ -358,16 +399,6 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 //        AppCompatDelegate.setDefaultNightMode(themeMode)
 //    }
 
-    override fun deleteHistory(isDelete: Boolean) {
-        if (isDelete) {
-            answers = arrayListOf()
-            expressions = arrayListOf()
-            saveHistory()
-            replaceFragment(R.id.numberPad, lastFragment)
-            isFirstLaunch = true
-        }
-    }
-
     override fun listItemPosition(position: Int) {
         inputWindow.setText(expressions[position])
         outputWindow.text = ""
@@ -381,15 +412,5 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
         exitProcess(0);
     }
 
-    private fun saveHistory() {
-        val answerString = answers.joinToString(";")
-        val expressionsString = expressions.joinToString(";")
 
-        val sharedPref= this?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
-            putString("answer", answerString)
-            putString("expressions", expressionsString)
-            apply()
-        }
-    }
 }
