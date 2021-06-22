@@ -55,18 +55,17 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 
     private val basicNumberPadFragment = BasicNumberPadFragment()
     private val engineeringNumberPadFragment = EngineeringNumberPadFragment()
+    private  lateinit var lastFragment: Fragment
 
-    private var isFirstLaunch = true
+    private var instanceState: Bundle? = null
+
     private lateinit var characters: List<String>
-    private var answers: ArrayList<String> = arrayListOf()
-    private var expressions: ArrayList<String> = arrayListOf()
     private var historyMap: LinkedHashMap<String, String> = linkedMapOf()
 
-    private  lateinit var lastFragment: Fragment
+    private var isFirstLaunch = true
     private var isHistory = false
     private var isEngineeringPad = false
     private var isNightMode = true
-    private var instanceState: Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,15 +117,14 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
                 outputWindow.text = result
             }
         }
-
     }
 
     //TODO Implement the transition from two lists to one map
     override fun onStart() {
         super.onStart()
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        answers = ArrayList(sharedPref.getString("answer", "")?.split(";"))
-        expressions = ArrayList(sharedPref.getString("expressions", "")?.split(";"))
+        val answers = ArrayList(sharedPref.getString("answer", "")?.split(";"))
+        val expressions = ArrayList(sharedPref.getString("expressions", "")?.split(";"))
         for (i in 0 until answers.size) {
             historyMap[expressions[i]] = answers[i]
         }
@@ -160,7 +158,6 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             inputWindow.setText("$start$end")
             setCursorPosition(cursorPosition - 1)
         }
-
     }
 
     private fun addElementToWindow(buttonText: String, isStart: Boolean = false, isBracket: Boolean = false) {
@@ -206,7 +203,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
     private fun outputToScreen() {
         if (
             !isFirstLaunch &&
-            inputWindow.text.toString() == expressions[expressions.size-1] &&
+            inputWindow.text.toString() == historyMap.keys.toList()[historyMap.keys.size - 1] &&
             outputWindow.text.isNotEmpty()
         ) {
             inputWindow.setText(outputWindow.text)
@@ -229,25 +226,8 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
                 else
                     inputWindow.setText(outputText)
 
-
-//            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-//                if (outputText.indexOf("FAE") != -1)
-//                    outputWindow.text = getString(R.string.invalid_expression)
-//                else
-//                    outputWindow.text = outputText
-//            } else {
-//                if (outputText.indexOf("FAE") != -1)
-//                    inputWindow.setText(getString(R.string.invalid_expression))
-//                else
-//                    inputWindow.setText(outputText)
-//            }
-
-//            if (inputWindow.text.toString().isNotEmpty() && outputWindow.text.toString().isNotEmpty()) {
-//
-//            }
             historyMap[inputText] = outputText
             outputWindow.text = ""
-
         }
         saveHistory()
         setCursorPosition()
@@ -312,8 +292,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
             .beginTransaction()
             .addToBackStack(null)
 
-        bundle.putStringArrayList("answer", answers)
-        bundle.putStringArrayList("expression", expressions)
+        bundle.putSerializable("map", historyMap)
         historyPad.arguments = bundle
 
         isHistory = !isHistory
@@ -347,8 +326,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 
     override fun deleteHistory(isDelete: Boolean) {
         if (isDelete) {
-            answers = arrayListOf()
-            expressions = arrayListOf()
+            historyMap.clear()
             saveHistory()
             replaceFragment(R.id.numberPad, lastFragment)
             isFirstLaunch = true
@@ -364,13 +342,12 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
                     .add(R.id.numberPad, engineeringNumberPad, "engineering_pad")
                     .commit()
         }
-        if (isEngineeringPad) {
+        lastFragment = if (isEngineeringPad) {
             replaceFragment(R.id.numberPad, engineeringNumberPad)
-            lastFragment = engineeringNumberPad
-        }
-        else {
+            engineeringNumberPad
+        } else {
             replaceFragment(R.id.numberPad, basicNumberPadFragment)
-            lastFragment = basicNumberPadFragment
+            basicNumberPadFragment
         }
     }
 
@@ -413,7 +390,7 @@ class MainActivity : AppCompatActivity(), ClickHandler, ClickDeleteHistory, Clic
 //    }
 
     override fun listItemPosition(position: Int) {
-        inputWindow.setText(expressions[position])
+        inputWindow.setText(historyMap.keys.toList()[position])
         outputWindow.text = ""
         setCursorPosition()
     }

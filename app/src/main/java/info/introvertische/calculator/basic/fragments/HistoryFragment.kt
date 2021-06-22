@@ -22,20 +22,21 @@ class HistoryFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val listTitle = this.arguments?.getStringArrayList("answer")
-        val listContext = this.arguments?.getStringArrayList("expression")
+        val history: LinkedHashMap<String, String> = this.arguments?.getSerializable("map")
+                as LinkedHashMap<String, String>
         val rootView = inflater.inflate(R.layout.fragment_history, container, false)
 
         val listHistory: ListView = rootView.findViewById(R.id.listHistory)
         val data: ArrayList<HashMap<String, String>> = arrayListOf()
         var m: HashMap<String, String>
+        val historyKey = history.keys.toList()
 
-        val index = if (listTitle!!.size > 1) 1 else 0
+        val index = if (history.size > 1) 1 else 0
 
-        for (i in listTitle?.lastIndex!! downTo index) {
+        for (i in history.size - 1 downTo index) {
             m = hashMapOf()
-            m["title"] = listTitle[i]
-            m["context"] = listContext!![i]
+            m["title"] = historyKey[i]
+            m["context"] = history[historyKey[i]].toString()
             data.add(m)
         }
 
@@ -52,7 +53,7 @@ class HistoryFragment : Fragment(), View.OnClickListener {
         listHistory.onItemClickListener =
             OnItemClickListener { parent, itemClicked, position, id ->
                 try {
-                    clickListItem.listItemPosition((listContext?.size ?: 0) - position - 1)
+                    clickListItem.listItemPosition(history.size - position - 1)
                 } catch (exp: Exception) {
 
                 }
